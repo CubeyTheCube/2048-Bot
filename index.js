@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 var fs = require('fs');
-const config = require("./config.json");
 const https = require('https');
 const {
 	registerFont,
@@ -10,7 +9,7 @@ const bot = new Discord.Client();
 registerFont('clear.ttf', {
 	family: 'Clear'
 });
-bot.login(config.BOT_TOKEN);
+bot.login(process.env.BOT_TOKEN);
 
 bot.on('ready', () => {
 	console.info(`Logged in as ${bot.user.tag}!`);
@@ -173,7 +172,7 @@ bot.on('message', msg => {
 			update();
 			const keys = ['ArrowLeft', 'ArrowDown', 'ArrowRight', 'ArrowUp', 'a', 's', 'd', 'w', 'h', 'j', 'k', 'l']; // list of keys
 			const attachment = new Discord.MessageAttachment(c.toBuffer(), 'welcome-image.png');
-			bot.channels.cache.get('777664740506730536').send(attachment).then(message2 => {
+			bot.channels.cache.get(process.env.IMAGE_CHANNEL).send(attachment).then(message2 => {
 				const game = new Discord.MessageEmbed()
 					.setColor('#edc22e')
 					.setImage(message2.attachments.first().url);
@@ -189,7 +188,7 @@ bot.on('message', msg => {
 					collector.on('collect', (reaction, user) => {
 						move(["⬅", "⬇", "➡", "⬆"].indexOf(reaction.emoji.name));
 						const attachment2 = new Discord.MessageAttachment(c.toBuffer(), 'hello.png');
-						bot.channels.cache.get('777664740506730536').send(attachment2).then(message2 => {
+						bot.channels.cache.get(process.env.IMAGE_CHANNEL).send(attachment2).then(message2 => {
 							const game2 = new Discord.MessageEmbed()
 								.setColor('#edc22e')
 								.setImage(message2.attachments.first().url);

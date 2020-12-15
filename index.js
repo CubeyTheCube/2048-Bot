@@ -1,6 +1,4 @@
 const Discord = require('discord.js');
-var fs = require('fs');
-const https = require('https');
 const {
 	registerFont,
 	createCanvas
